@@ -3,7 +3,8 @@
  * Enemies should have lower stats... I guess I shouldn't have so many
  * magic numbers in here. I'll change that ~ aaaand changed.
  */
-public class Character extends Entity implements Damageable, Aggroable{
+public class Character extends Entity implements Damageable, Aggroable,
+    Levelable {
     private Item weapon;
     private int level;
     private int exp;
@@ -77,9 +78,9 @@ public class Character extends Entity implements Damageable, Aggroable{
     public int getCurrentHealth() {
         return vit;
     }
-    public boolean isDead() {
+    public boolean isDead() throws EntityIsDeadException{
         if (this.vit <= 0) {
-            return true;
+            throw new EntityIsDeadException("Player is Dead X-X");
         } else {
             return false;
         }

@@ -4,7 +4,7 @@ public interface Damageable {
     //takes damage from another object
     public int takeDmg(int dmg);
     //checks if the damageable object is dead
-    public boolean isDead();
+    public boolean isDead() throws EntityIsDeadException;
     //regenerates health for the object
     public int regenHealth();
     //gets the current health of the damageable object

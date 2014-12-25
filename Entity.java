@@ -1,4 +1,4 @@
-public class Entity implements Locatable{
+public abstract class Entity implements Locatable, Comparable<Entity>{
     private Location loc;
     private String name;
     private int str;
@@ -6,6 +6,13 @@ public class Entity implements Locatable{
     private int dex;
     private int health;
     private static int numEntities = 0;
+    private int numEntity;
+    public static EntityHolder<Entity> holder = new EntityHolder();
+    /**
+     *Constructs the Entity. Very helpful because it adds each new entity
+     *to the Entity.holder.
+     *
+     */
     public Entity(Location loc, String name, int str, int intel,
         int dex, int health) {
         this.loc = loc.deepCopy();
@@ -15,7 +22,8 @@ public class Entity implements Locatable{
         this.dex = dex;
         this.health = health;
         numEntities++;
-
+        numEntity = numEntities;
+        holder.add(this);
     }
     public Location getLoc() {
         return this.loc.deepCopy();
@@ -58,6 +66,11 @@ public class Entity implements Locatable{
     public void setHealth(int health) {
         this.health = health;
     }
-
+    public int getNumEntity() {
+        return numEntity;
+    }
+    public int compareTo(Entity o) {
+        return numEntity - o.getNumEntity();
+    }
 
 }
